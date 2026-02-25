@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ISI Kaffrine - Institut Supérieur d'Informatique - Actualités et événements">
+    <title>Actualités - ISI Kaffrine</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style_v2.css">
+    <!-- Lightbox CSS -->
+    <style>
+        .nav-logo {
+            height: 80px;
+            width: auto;
+            margin-right: 10px;
+            max-width: 200px;
+            object-fit: contain;
+        }
+        .lightbox {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+        .lightbox img, .lightbox video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox .close:hover {
+            transform: scale(1.2);
+            color: #007bff;
+        }
+
+        .actualite-banner {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .actualite-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .actualite-banner .date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .programme-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .programme-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .programme-list li:before {
+            content: "🎓";
+            position: absolute;
+            left: 0;
+            color: #007bff;
+        }
+
+        .avantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .avantage-item {
+            background: rgba(0,123,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <marquee style="background-color: #007bff; color: white; font-size: 24px; font-weight: bold; padding: 10px 0;">INSTITUT SUPERIEUR D'INFORMATIQUE ISI_KAFFRINE</marquee>
+
+    <!-- ========== HEADER MAIN ========== -->
+    <header class="header-main container" id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo-wrapper">
+                    <div class="logo-text">
+                        <img src="../logos.jpeg" alt="ISI Kaffrine" class="logo-image">
+                    </div>
+                </div>
+
+                <!-- Navigation Desktop -->
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li class="nav-item logo-nav-item">
+                            <img src="../logos.jpeg" alt="ISI Logo" class="nav-logo">
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link">Accueil</a>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <a href="#" class="nav-link">
+                                Groupe ISI
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../index.html#administration">Administration</a></li>
+                                <li><a href="../index.html#motpdg">Mot du PDG</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="departements.html" class="nav-link">Départements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="elearning.html" class="nav-link">E-learning</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="amea.html" class="nav-link">Vie Associative</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="actualite.html" class="nav-link active">Actualités</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+             
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <button class="btn-search" id="searchBtn" aria-label="Rechercher">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="../index.html#preinscription" class="btn-primary btn-header">
+                        <span>Pré-inscription</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <form class="search-form">
+                    <input type="search" placeholder="Rechercher une formation, un département..." class="search-input">
+                    <button type="submit" class="search-submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <div class="search-suggestions">
+                    <h4>Suggestions populaires</h4>
+                    <ul>
+                        <li><a href="departements.html">Réseaux Informatique</a></li>
+                        <li><a href="departements.html">Comptabilité Finance</a></li>
+                        <li><a href="departements.html">Infographie</a></li>
+                        <li><a href="../index.html#preinscription">Inscription en ligne</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="actualites-section section-padding bg-light" id="actualites">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Restez informé</span>
+                <h2 class="section-title">
+                    <span class="highlight">Actualités</span>
+                </h2>
+            </div>
+            <div style="text-align:center;margin-bottom:20px;">
+                <a href="contact.html" class="btn-primary">Contactez-nous</a>
+            </div>
+
+            <article style="margin-bottom:40px;padding:25px;border:1px solid #ddd;border-radius:12px;background:#fff;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+                <div class="actualite-banner">
+                    <h2>🎓 LANCEMENT OFFICIEL DES COURS EN LIGNE – ISI KAFFRINE 💻</h2>
+                    <p class="date">📅 Début des cours : 15 février 2026</p>
+                </div>
+
+                <div style="font-size:16px;line-height:1.8;">
+                    <p>Dans un monde dominé par le numérique et les nouvelles technologies, la formation en ligne est devenue un pilier essentiel pour réussir sa carrière professionnelle. L'Institut Supérieur d'Informatique de Kaffrine (ISI KAFFRINE) a le plaisir d'annoncer le démarrage officiel de ses cours en ligne à partir du <strong style="color:#007bff;">15 février 2026</strong> sur son site internet.</p>
+                    
+                    <p>Les cours en ligne offrent aujourd'hui une opportunité exceptionnelle d'apprendre sans se déplacer, avec flexibilité et efficacité. Ils permettent aux étudiants et aux professionnels de suivre des formations de qualité, d'accéder aux supports pédagogiques à tout moment et de se former selon leur disponibilité.</p>
+                    
+                    <h4 style="color:#007bff; margin: 25px 0 15px; font-size:1.3rem;">📋 Programmes proposés :</h4>
+                    
+                    <div style="background:#f8f9fa; padding:20px; border-radius:10px; margin-bottom:20px;">
+                        <h5 style="margin: 0 0 10px; color:#28a745; font-size:1.2rem;">🎓 Niveau Master Professionnel</h5>
+                        <ul class="programme-list">
+                            <li><strong>Finance</strong> - Ingénierie financière, gestion de portefeuille et analyse des risques</li>
+                            <li><strong>Génie Logiciel</strong> - Architecture logicielle avancée, DevOps et gestion de projets agiles</li>
+                            <li><strong>Réseaux et Systèmes Informatiques</strong> - Infrastructures cloud, virtualisation et sécurité avancée</li>
+                        </ul>
+                        <p style="margin-left: 25px; font-style: italic; color: #555; margin-top:10px;">Ces formations visent à former des cadres compétents capables de gérer des projets informatiques, financiers et technologiques dans les entreprises modernes.</p>
+                    </div>
+                    
+                    <div style="background:#f8f9fa; padding:20px; border-radius:10px; margin-bottom:20px;">
+                        <h5 style="margin: 0 0 10px; color:#28a745; font-size:1.2rem;">🎓 Niveau Licence Professionnelle</h5>
+                        <ul class="programme-list">
+                            <li><strong>Réseaux Informatiques</strong> - Installation, configuration, maintenance des réseaux et administration des systèmes</li>
+                            <li><strong>Finance Comptabilité</strong> - Gestion de la comptabilité, analyse financière et gestion budgétaire des entreprises</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background:#f8f9fa; padding:20px; border-radius:10px; margin-bottom:20px;">
+                        <h5 style="margin: 0 0 10px; color:#28a745; font-size:1.2rem;">🛠️ Brevet de Technicien Informatique</h5>
+                        <p style="margin-left: 25px;">Une formation pratique pour développer des compétences techniques solides et intégrer rapidement le monde professionnel.</p>
+                    </div>
+                    
+                    <div style="background: #e3f2fd; padding: 25px; border-radius: 12px; margin: 30px 0; border-left: 5px solid #007bff;">
+                        <h4 style="color:#007bff; margin-bottom: 20px; font-size:1.3rem;">🌍 Pourquoi choisir les cours en ligne à ISI KAFFRINE ?</h4>
+                        <div class="avantages-grid">
+                            <div class="avantage-item">✔️ Accès aux cours partout et à tout moment</div>
+                            <div class="avantage-item">✔️ Encadrement par des formateurs qualifiés</div>
+                            <div class="avantage-item">✔️ Supports pédagogiques modernes</div>
+                            <div class="avantage-item">✔️ Formations professionnelles adaptées au marché</div>
+                            <div class="avantage-item">✔️ Diplômes reconnus par l'État</div>
+                            <div class="avantage-item">✔️ Tarifs adaptés et facilités de paiement</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 25px; border-radius: 12px; text-align: center; margin: 30px 0; font-size:1.2rem; font-weight:600;">
+                        <p style="margin:0;">👉 Rejoignez ISI KAFFRINE dès le 15 février 2026 et préparez votre avenir avec des formations professionnelles de qualité accessibles en ligne.</p>
+                    </div>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 25px; margin-top: 35px; justify-content: center;">
+                        <div style="text-align:center;">
+                            <img src="../images/VAC1.jpeg" alt="Cours en ligne - Master Professionnel" style="width:100%;max-width:260px;height:auto;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:transform 0.3s;" class="lightbox-image" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            <p style="margin-top:10px; font-weight:500;">Master Professionnel</p>
+                        </div>
+                        <div style="text-align:center;">
+                            <img src="../images/VAC2.jpeg" alt="Cours en ligne - Licence Professionnelle" style="width:100%;max-width:260px;height:auto;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:transform 0.3s;" class="lightbox-image" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            <p style="margin-top:10px; font-weight:500;">Licence Professionnelle</p>
+                        </div>
+                        <div style="text-align:center;">
+                            <img src="../images/VAC3.jpeg" alt="Cours en ligne - Brevet de Technicien" style="width:100%;max-width:260px;height:auto;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:transform 0.3s;" class="lightbox-image" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            <p style="margin-top:10px; font-weight:500;">Brevet de Technicien</p>
+                        </div>
+                        <div style="text-align:center;">
+                            <img src="../VAC4.jpeg" alt="Cours en ligne - Formation à distance" style="width:100%;max-width:260px;height:auto;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:transform 0.3s;" class="lightbox-image" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            <p style="margin-top:10px; font-weight:500;">Formation à distance</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; font-style: italic; color: #666; font-size:0.95rem;">Découvrez nos programmes de formation en ligne pour l'année académique 2026 - Inscriptions ouvertes</p>
+                </div>
+            </article>
+
+            <article style="margin-bottom:30px;padding:20px;border:1px solid #ddd;border-radius:10px;background:#fafafa;">
+                <h3 style="color:#007bff;margin-top:0;">Ouverture des inscriptions - Année académique 2025-2026</h3>
+                <p style="margin:5px 0;"><strong>Date:</strong> 1er octobre 2024</p>
+                <p>Les inscriptions pour l'année académique 2025-2026 sont désormais ouvertes depuis le début du mois d'octobre à l'Institut Supérieur d'Informatique de Kaffrine. Nous accueillons les candidatures pour tous nos départements : Informatique, Gestion, et nos formations en ligne.</p>
+                <p>Les inscriptions sont toujours en cours. N'hésitez pas à nous contacter pour obtenir tous les renseignements nécessaires et soumettre votre dossier de pré-inscription.</p>
+                <p><em>Pour plus d'informations, visitez notre section Pré-inscription ou contactez-nous directement.</em></p>
+        
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; justify-content: center;">
+                    <img src="../images/actu6.jpeg" alt="Ouverture des inscriptions 2025-2026" style="width:100%;max-width:300px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-image">
+                    <img src="../images/fm1.jpeg" alt="Formation et inscriptions 2025-2026" style="width:100%;max-width:300px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-image">
+                    <img src="../images/fm2.jpeg" alt="Campus et inscriptions 2025-2026" style="width:100%;max-width:300px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-image">
+                </div>
+            </article>
+            
+            <article style="margin-bottom:30px;padding:20px;border:1px solid #ddd;border-radius:10px;background:#fafafa;">
+                <h3 style="color:#007bff;margin-top:0;">Préparation du renouvellement de l'AMEA (Amical des Etudiants et Alumnis)</h3>
+                <p style="margin:5px 0;"><strong>Date:</strong> Janvier 2025</p>
+                <p>L'Institut Supérieur d'Informatique de Kaffrine se prépare activement pour le renouvellement de l'AMEA (Amical des Etudiants et Alumnis). Cette préparation inclut l'organisation d'événements, la mise à jour des réseaux professionnels et le renforcement des liens entre étudiants actuels et alumni.</p>
+                <p>Parallèlement, nous préparons la deuxième rentrée académique avec des cours en ligne renforcés pour offrir une flexibilité maximale à nos étudiants. Notre équipe travaille sur l'amélioration des plateformes d'enseignement à distance et l'intégration de nouvelles technologies pédagogiques.</p>
+                <p><em>Nous restons déterminés à offrir à nos étudiants et alumni un environnement d'apprentissage et de networking optimal, adapté aux défis modernes de l'éducation.</em></p>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; justify-content: center;">
+                    <img src="../images/actu8.jpeg" alt="Préparation du renouvellement de l'AMEA" style="width:100%;max-width:380px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-image">
+                    <img src="../images/actu9.jpeg" alt="Préparation du renouvellement de l'AMEA" style="width:100%;max-width:380px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-image">
+                </div>
+                
+                <h4 style="color:#007bff; margin:25px 0 15px;">📹 Vidéos de présentation</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; justify-content: center;">
+                    <video src="../images/actu2 - Copie.mp4" controls style="width:200px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-video"></video>
+                    <video src="../images/actu2.mp4" controls style="width:200px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-video"></video>
+                    <video src="../images/actu3.mp4" controls style="width:200px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-video"></video>
+                    <video src="../images/actu4.mp4" controls style="width:200px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-video"></video>
+                    <video src="../images/actu5.mp4" controls style="width:200px;height:auto;border-radius:8px;cursor:pointer;" class="lightbox-video"></video>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-grid">
+                   
+                    <div class="footer-col">
+                        <div class="footer-logo">
+                            <img src="../logo.jpg" alt="ISI Kaffrine">
+                            <span>INSTITUT SUPERIEUR D'INFORMATIQUE</span>
+                        </div>
+                        <p class="footer-text">
+                            Institut Supérieur d'Informatique de Kaffrine - Formation de qualité depuis 2014
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://www.facebook.com/isikaffrine" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@la.isienne" target="_blank">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="#" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-title">Liens rapides</h4>
+                        <ul class="footer-links">
+                            <li><a href="#Accueil">Accueil</a></li>
+                            <li><a href="departements.html">Formations</a></li>
+                            <li><a href="elearning.html">E-learning</a></li>
+                            <li><a href="actualite.html">Actualités</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-title">Contact</h4>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>33 946 15 15 / 76 644 85 41</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>isikaffrine@groupeisi.com</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kaffrine, Sénégal</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Restez informé de nos actualités</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Votre email" required>
+                            <button type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 ISI Kaffrine. Tous droits réservés.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Mentions légales</a>
+                        <a href="#">Politique de confidentialité</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script src="../js/main_v2.js"></script>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <div id="lightbox-content"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          
+            fetch('backend.php?action=log_visit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'page=' + encodeURIComponent(window.location.pathname)
+            }).catch(error => console.error('Erreur logging visite:', error));
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxContent = document.getElementById('lightbox-content');
+            const closeBtn = lightbox.querySelector('.close');
+
+            function openLightbox(element) {
+                const clone = element.cloneNode(true);
+                clone.style.maxWidth = '95%';
+                clone.style.maxHeight = '95%';
+                clone.style.objectFit = 'contain';
+                
+                if (clone.tagName === 'VIDEO') {
+                    clone.controls = true;
+                    clone.autoplay = true;
+                }
+                
+                lightboxContent.innerHTML = '';
+                lightboxContent.appendChild(clone);
+                lightbox.style.display = 'block';
+            }
+
+            function closeLightbox() {
+                lightbox.style.display = 'none';
+                lightboxContent.innerHTML = '';
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.style.display === 'block') {
+                    closeLightbox();
+                }
+            });
+
+            document.querySelectorAll('.lightbox-image, .lightbox-video').forEach(element => {
+                element.addEventListener('click', function() {
+                    openLightbox(this);
+                });
+            });
+
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.display = 'flex';
+                } else {
+                    scrollTopBtn.style.display = 'none';
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

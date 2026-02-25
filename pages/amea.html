@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ISI Kaffrine - Institut Supérieur d'Informatique - Formations en Informatique, Réseaux, Gestion">
+    <title>ISI Kaffrine - Institut Supérieur d'Informatique</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .bg-light {
+            background: #f8f9fa;
+        }
+        
+        .header-main {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo-image {
+            height: 60px;
+            width: auto;
+        }
+        
+        .main-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #007bff;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #007bff;
+        }
+        
+        .nav-item.has-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            display: none;
+            z-index: 100;
+        }
+        
+        .nav-item.has-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .dropdown-menu li {
+            list-style: none;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu a:hover {
+            background: #007bff;
+            color: white;
+        }
+        
+        .fas.fa-chevron-down {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn-search {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        .btn-search:hover {
+            color: #007bff;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1100;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .search-overlay.active {
+            display: flex;
+        }
+        
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .search-close:hover {
+            color: #007bff;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .search-submit {
+            padding: 15px 30px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .search-submit:hover {
+            background: #0056b3;
+        }
+        
+        .search-results {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-results h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .search-result-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-result-item a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .search-result-item h4 {
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+        
+        .search-result-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        
+        .no-results {
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        marquee {
+            background: #007bff;
+            color: white;
+            padding: 10px 0;
+            font-weight: bold;
+            margin-top: 91px;
+        }
+        
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('etudiants.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .hero-content {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .title-highlight {
+            color: #007bff;
+            display: block;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #007bff;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-subtitle {
+            color: #007bff;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: #007bff;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            position: relative;
+        }
+        
+        .about-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+        
+        .about-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .about-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .about-features i {
+            color: #007bff;
+            margin-top: 3px;
+        }
+        
+        .methode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .methode-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .methode-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .methode-icon {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        
+        .methode-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .icon {
+            width: 70px;
+            height: 70px;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+        }
+        
+        .toggle {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle:hover {
+            background: #0056b3;
+        }
+        
+        .content {
+            display: none;
+            margin-top: 15px;
+            text-align: left;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .content p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .administration-section,
+        .motpdg-section {
+            padding: 60px 0;
+        }
+        
+        .administration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .admin-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .admin-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 3px solid #007bff;
+        }
+        
+        .motpdg-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .motpdg-content img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        textarea {
+            grid-column: 1 / -1;
+        }
+        
+        button[type="submit"] {
+            grid-column: 1 / -1;
+            padding: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background: #0056b3;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        article {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        article h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        
+        article img {
+            max-width: 400px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: #007bff;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #007bff;
+        }
+        
+        .footer-contact li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            border-radius: 25px 0 0 25px;
+            border-right: none;
+        }
+        
+        .newsletter-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-bottom-links a {
+            color: #ddd;
+            text-decoration: none;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #007bff;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 100;
+        }
+        
+        .department-description {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .debourses-section {
+            background: #e9f7fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .debourses-section h4 {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .debourses-section ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .debourses-section li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .debourses-section p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .actualite-banner {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .actualite-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .actualite-banner .date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .programme-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .programme-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .programme-list li:before {
+            content: "🎓";
+            position: absolute;
+            left: 0;
+            color: #007bff;
+        }
+
+        .avantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .avantage-item {
+            background: rgba(0,123,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .lightbox-media {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+            color: #007bff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            font-weight: 500;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            padding: 20px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #007bff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-nav.prev {
+            left: 30px;
+        }
+
+        .lightbox-nav.next {
+            right: 30px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: white;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .lightbox-thumbnails {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            max-width: 90%;
+            overflow-x: auto;
+        }
+
+        .lightbox-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-thumbnail:hover {
+            transform: scale(1.1);
+        }
+
+        .lightbox-thumbnail.active {
+            border: 2px solid #007bff;
+            transform: scale(1.1);
+        }
+
+        .lightbox-image, 
+        .lightbox-video {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-image:hover,
+        .lightbox-video:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,123,255,0.3);
+        }
+
+        .association-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .association-section .section-title {
+            color: white;
+        }
+
+        .association-section .section-subtitle {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .association-flex {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            margin-top: 40px;
+        }
+
+        .association-block {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .association-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .association-header {
+            background: linear-gradient(135deg, #007bff, #00d2ff);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .association-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .association-header i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .association-header.active i {
+            transform: rotate(180deg);
+        }
+
+        .association-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background: #f8f9fa;
+        }
+
+        .association-content.show {
+            max-height: 3000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .association-inner {
+            padding: 25px;
+        }
+
+        .association-inner h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .association-inner h4 {
+            color: #007bff;
+            margin: 20px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .association-inner p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .association-inner p::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .association-inner p::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .association-inner p::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 5px;
+        }
+
+        .association-inner ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .association-inner li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: #666;
+        }
+
+        .association-inner li:before {
+            content: "✓";
+            color: #007bff;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .association-inner .badge {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .association-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .association-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .association-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .association-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .association-meta i {
+            color: #007bff;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .gallery-item {
+            width: 220px;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .gallery-video {
+            width: 220px;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .motpdg-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .lightbox-nav {
+                font-size: 30px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .lightbox-close {
+                font-size: 40px;
+                top: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 91px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .main-nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                padding-left: 20px;
+                display: none;
+            }
+            
+            .nav-item.has-dropdown:hover .dropdown-menu {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-cta,
+            .hero-stats,
+            .cta-actions {
+                flex-direction: column;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            marquee {
+                margin-top: 91px;
+                font-size: 18px;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-submit {
+                width: 100%;
+            }
+            
+            .lightbox-content {
+                padding: 20px;
+            }
+            
+            .lightbox-nav {
+                display: none;
+            }
+            
+            .lightbox-thumbnails {
+                bottom: 50px;
+            }
+            
+            .gallery-container {
+                justify-content: center;
+            }
+            
+            .gallery-item {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .gallery-video {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .administration-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-container {
+                padding: 10px;
+            }
+            
+            .lightbox-close {
+                font-size: 35px;
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-header">
+                <h2 style="color: white; font-size: 24px;">Rechercher sur le site</h2>
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form class="search-form" id="searchForm">
+                <input type="text" class="search-input" id="searchInput" 
+                       placeholder="Rechercher des formations, actualités, informations..." 
+                       autocomplete="off">
+                <button type="submit" class="search-submit">
+                    <i class="fas fa-search"></i> Rechercher
+                </button>
+            </form>
+            
+            <div class="search-results" id="searchResults">
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <div class="lightbox-content" id="lightboxContent">
+            <span class="lightbox-close" id="lightboxClose">&times;</span>
+            <span class="lightbox-nav prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+            <span class="lightbox-nav next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+            <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+        </div>
+    </div>
+
+    <marquee>INSTITUT SUPERIEUR D'INFORMATIQUE ISI_KAFFRINE</marquee>
+
+    <header class="header-main" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-wrapper">
+                    <img src="../logos.jpeg" alt="ISI Kaffrine" class="logo-image">
+                </div>
+
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link active">Accueil</a>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <a href="#" class="nav-link">
+                                Groupe ISI
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="administration.html">Administration</a></li>
+                                <li><a href="motdupdg.html">Mot du PDG</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="departements.html" class="nav-link">Départements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="elearning.html" class="nav-link">E-learning</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Vie Associative</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="actualite.html" class="nav-link">Actualités</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="btn-search" id="searchButton">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="#preinscription" class="btn-primary btn-header">
+                        <span>Pré-inscription</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="association-section section-padding" id="vie-associative">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Vie étudiante</span>
+                <h2 class="section-title">Vie <span class="highlight">Associative</span></h2>
+                <p style="color: white;">Découvrez toutes les activités et associations qui animent le campus</p>
+            </div>
+
+            <div class="association-flex">
+                <!-- BLOCK 1: AMEA (avec Événements Culturels, Activités Sportives, Campus fusionnés) -->
+                <div class="association-block">
+                    <div class="association-header" onclick="toggleContent(this)">
+                        <h3>
+                            <span class="association-icon">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            AMEA - Amical des Etudiants et Alumnis
+                        </h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="association-content">
+                        <div class="association-inner">
+                            <h3>AMEA - Amical des Etudiants et Alumnis</h3>
+                            <p><strong>Importance de l’AMEA (Amicale des Étudiants et Alumni) au sein d’un Institut</strong><br><br>
+                            L’AMEA, Amicale des Étudiants et Alumni, joue un rôle fondamental dans la vie et le rayonnement d’un institut. Elle constitue un pont solide entre les étudiants en formation et les anciens diplômés, favorisant ainsi la continuité, la solidarité et le développement institutionnel.<br><br>
+                            Au sein de l’institut, l’AMEA contribue avant tout à renforcer la cohésion et l’entraide entre les étudiants. Elle crée un cadre d’échanges, de partage d’expériences et de soutien moral, académique et parfois matériel. Grâce à ses activités (journées d’intégration, conférences, ateliers, actions sociales), elle participe activement à l’amélioration du climat scolaire et au bien-être des apprenants.<br><br>
+                            L’AMEA joue également un rôle stratégique dans l’orientation et l’insertion professionnelle des étudiants. Les alumni, forts de leur expérience sur le marché du travail, accompagnent les étudiants à travers des conseils, du mentorat, des stages, des opportunités d’emploi et des témoignages inspirants. Cette relation favorise une meilleure adéquation entre la formation reçue et les réalités professionnelles.</p>
+                            
+                            <h4>Galerie AMEA (Événements, Sports, Campus)</h4>
+                            <div class="gallery-container">
+                                <!-- Images originales AMEA -->
+                                <img src="../images/amea.jpg" alt="AMEA" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=300 height=200><rect width=100% height=100% fill=%23ddd/><text x=50 y=100 fill=%23666 font-size=14>amea.jpg</text></svg>'">
+                                <img src="../images/ameai.jpg" alt="AMEAI" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=300 height=200><rect width=100% height=100% fill=%23ddd/><text x=50 y=100 fill=%23666 font-size=14>ameai.jpg</text></svg>'">
+                                <img src="../images/ameais.jpg" alt="AMEAIS" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=300 height=200><rect width=100% height=100% fill=%23ddd/><text x=50 y=100 fill=%23666 font-size=14>ameais.jpg</text></svg>'">
+                                
+                                <!-- Événements Culturels -->
+                                <img src="../images/dej1.jpg" alt="Événement Culturel" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>dej1.jpg</text></svg>'">
+                                <img src="../images/dej.jpg" alt="Déjeuner" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>dej.jpg</text></svg>'">
+                                <video src="../images/feu.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <video src="../images/ambiance.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <video src="../images/ameaf.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                
+                                <!-- Activités Sportives -->
+                                <video src="../images/isikl.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <video src="../images/dosaa.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <video src="../images/video1.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <video src="../images/dosa.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <img src="../images/equipe.jpg" alt="Équipe" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>equipe.jpg</text></svg>'">
+                                <img src="../images/ameaisi.jpg" alt="AMEA ISI" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>ameaisi.jpg</text></svg>'">
+                                
+                                <!-- Campus et Vie Étudiante -->
+                                <img src="../images/amphi.jpg" alt="Amphithéâtre" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>amphi.jpg</text></svg>'">
+                                <img src="../images/amphiejpg.jpg" alt="Amphi JPG" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>amphiejpg.jpg</text></svg>'">
+                                <img src="../images/debat.jpg" alt="Débat" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>debat.jpg</text></svg>'">
+                                <img src="../images/best.jpg" alt="Meilleur Étudiant" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>best.jpg</text></svg>'">
+                                <img src="../images/soda.jpg" alt="Soda" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>soda.jpg</text></svg>'">
+                                <img src="../images/sadikh.jpg" alt="Sadikh" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>sadikh.jpg</text></svg>'">
+                                <img src="../images/president.jpg" alt="Président" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>president.jpg</text></svg>'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOCK 2: Étudiants et Alumni (conservé) -->
+                <div class="association-block">
+                    <div class="association-header" onclick="toggleContent(this)">
+                        <h3>
+                            <span class="association-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </span>
+                            Étudiants et Alumni
+                        </h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="association-content">
+                        <div class="association-inner">
+                            <h3>Étudiants et Alumni</h3>
+                            <p><strong>Étudiants et Alumni</strong><br><br>
+                            Le rapprochement entre les étudiants et les alumni constitue l’un des piliers fondamentaux de l’AMEA (Amicale des Étudiants et Alumni). Ce lien intergénérationnel favorise la continuité, la solidarité et la transmission d’expériences au sein de l’institut.<br><br>
+                            Les alumni, forts de leur parcours académique et professionnel, jouent un rôle essentiel dans l’accompagnement et l’orientation des étudiants. À travers le mentorat, les conseils, les témoignages et le partage d’opportunités de stages ou d’emplois, ils contribuent à préparer les étudiants aux réalités du monde professionnel et à faciliter leur insertion sur le marché du travail.</p>
+                            
+                            <h4>Galerie Alumni</h4>
+                            <div class="gallery-container">
+                                <img src="../images/alumni.jpg" alt="Alumni" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>alumni.jpg</text></svg>'">
+                                <img src="../images/alumnie.jpeg" alt="Alumnie" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>alumnie.jpeg</text></svg>'">
+                                <img src="../images/alumnis.jpeg" alt="Alumnis" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>alumnis.jpeg</text></svg>'">
+                                <img src="../images/weuz.jpg" alt="Weuz" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>weuz.jpg</text></svg>'">
+                                <img src="../accueil.jpg" alt="Accueil" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>accueil.jpg</text></svg>'">
+                                <img src="../images/biram.jpg" alt="Biram" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>biram.jpg</text></svg>'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOCK 3: AMEA et Administration (conservé) -->
+                <div class="association-block">
+                    <div class="association-header" onclick="toggleContent(this)">
+                        <h3>
+                            <span class="association-icon">
+                                <i class="fas fa-building"></i>
+                            </span>
+                            AMEA et Administration
+                        </h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="association-content">
+                        <div class="association-inner">
+                            <h3>AMEA et Administration</h3>
+                            <p><strong>Importance des rencontres entre l’AMEA et l’Administration</strong><br><br>
+                            Les rencontres entre l’AMEA (Amicale des Étudiants et Alumni) et l’administration de l’institut constituent un élément clé du bon fonctionnement et du développement de l’établissement. Elles instaurent un cadre de dialogue permanent fondé sur l’écoute, la concertation et la collaboration.<br><br>
+                            Ces échanges permettent à l’AMEA de porter la voix des étudiants et des alumni auprès de l’administration. Ils favorisent l’expression des préoccupations, des besoins et des propositions des apprenants, contribuant ainsi à l’amélioration des conditions d’études, de vie scolaire et de formation.</p>
+                            
+                            <h4>Galerie Administration</h4>
+                            <div class="gallery-container">
+                                <img src="../images/responsablecampus kaff.jpg" alt="Responsable Campus" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>responsablecampus.jpg</text></svg>'">
+                                <img src="../images/adm.jpg" alt="Administration" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>adm.jpg</text></svg>'">
+                                <img src="../images/presi.jpg" alt="Président" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>presi.jpg</text></svg>'">
+                                <img src="../images/pdgad.jpeg" alt="PDG" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>pdgad.jpeg</text></svg>'">
+                                <img src="../images/debat.jpg" alt="Débat" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>debat.jpg</text></svg>'">
+                                <img src="../images/comptablecampus kaff.jpg" alt="Comptable" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>comptablecampus.jpg</text></svg>'">
+                                <img src="../images/les2.jpeg" alt="Les 2" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>les2.jpeg</text></svg>'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOCK 4: Autres Moments (conservé) -->
+                <div class="association-block">
+                    <div class="association-header" onclick="toggleContent(this)">
+                        <h3>
+                            <span class="association-icon">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                            Autres Moments
+                        </h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="association-content">
+                        <div class="association-inner">
+                            <h3>Autres Moments</h3>
+                            <p><strong>Autres Moments</strong><br><br>
+                            En plus des activités académiques, culturelles et sportives, la vie étudiante est rythmée par plusieurs autres moments importants qui contribuent à l’épanouissement et à la cohésion de la communauté estudiantine. Ces moments, souvent organisés ou accompagnés par l’AMEA (Amicale des Étudiants et Alumni), renforcent les liens sociaux et le sentiment d’appartenance à l’institut.</p>
+                            
+                            <h4>Galerie Autres Moments</h4>
+                            <div class="gallery-container">
+                                <img src="../images/look.jpg" alt="Look" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>look.jpg</text></svg>'">
+                                <img src="../images/roug.jpg" alt="Roug" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>roug.jpg</text></svg>'">
+                                <img src="../images/atous.jpg" alt="Atous" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>atous.jpg</text></svg>'">
+                                <img src="../images/so.jpg" alt="So" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>so.jpg</text></svg>'">
+                                <img src="../images/mané.jpg" alt="Mané" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>mané.jpg</text></svg>'">
+                                <img src="../images/reseau.jpg" alt="Réseau" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>reseau.jpg</text></svg>'">
+                                <video src="../images/fin.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <video src="../images/actu7.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <img src="../images/diop.jpg" alt="Diop" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>diop.jpg</text></svg>'">
+                                <video src="../images/photo1.mp4" controls class="gallery-item gallery-video" style="width:220px;height:150px;border-radius:8px;"></video>
+                                <img src="../images/ins.jpg" alt="Ins" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>ins.jpg</text></svg>'">
+                                <img src="../pr.jpg" alt="PR" class="gallery-item lightbox-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=220 height=150><rect width=100% height=100% fill=%23ddd/><text x=10 y=75 fill=%23666 font-size=14>pr.jpg</text></svg>'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="amea-see-more" class="btn-primary" style="font-size: 1.1rem; padding: 12px 30px;">Voir plus d'activités</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../logo.jpg" alt="ISI Kaffrine" class="lightbox-image">
+                        <span>INSTITUT SUPERIEUR D'INFORMATIQUE</span>
+                    </div>
+                    <p>Institut Supérieur d'Informatique de Kaffrine - Formation de qualité depuis 2014</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/isikaffrine" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@la.isienne" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">Liens rapides</h4>
+                    <ul class="footer-links">
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="administration.html">Administration</a></li>
+                        <li><a href="motpdg.html">Mot du PDG</a></li>
+                        <li><a href="departements.html">Formations</a></li>
+                        <li><a href="actualite.html">Actualites</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> <span>33 946 15 15 / 76 644 85 41</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>isikaffrine@groupeisi.com</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Kaffrine, Sénégal</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p>Restez informé de nos actualités</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 ISI Kaffrine. Tous droits réservés.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Mentions légales</a>
+                        <a href="#">Politique de confidentialité</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const searchButton = document.getElementById('searchButton');
+            const searchOverlay = document.getElementById('searchOverlay');
+            const searchClose = document.getElementById('searchClose');
+            const searchInput = document.getElementById('searchInput');
+            const searchForm = document.getElementById('searchForm');
+            const searchResults = document.getElementById('searchResults');
+            
+            const searchData = [
+                {
+                    title: "Accueil - ISI Kaffrine",
+                    description: "Décrochez votre diplôme en Informatique. Formation de qualité, campus moderne, insertion professionnelle garantie.",
+                    url: "#accueil",
+                    category: "Page principale"
+                },
+                {
+                    title: "Mot du PDG",
+                    description: "Message de M Abdou SAMBE, PDG du Groupe ISI : 'former et bien former'.",
+                    url: "#motpdg",
+                    category: "Direction"
+                },
+                {
+                    title: "À propos de nous",
+                    description: "Inauguré en 2014, l'Institut Supérieur d'Informatique est une référence dans la région en matière de formation professionnelle.",
+                    url: "#about",
+                    category: "À propos"
+                },
+                {
+                    title: "Génie Informatique",
+                    description: "Formations en Génie Logiciel, Infographie & Multimédia, Informatique de Gestion, Géomatique, Marketing Digital.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Réseaux & Systèmes",
+                    description: "Formations en Réseaux Informatiques, Télécoms, Cybersécurité, IoT & Systèmes Embarqués, Énergies Renouvelables.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Intelligence Artificielle",
+                    description: "Formations en Data Science & Big Data, MIAGE, Master Data Science & IA.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Gestion",
+                    description: "Formations en Finance & Comptabilité, Commerce International, Banque & Assurance.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Méthode ISI",
+                    description: "Formation pratique, équipements modernes, stages en entreprise, diplômes reconnus par l'État.",
+                    url: "#methode",
+                    category: "Pédagogie"
+                },
+                {
+                    title: "Administration",
+                    description: "Mr Babacar NDIAYE (Responsable du campus) et Mme Djiké Waly DIOUF (Comptable du campus).",
+                    url: "#administration",
+                    category: "Équipe"
+                },
+                {
+                    title: "Pré-inscription",
+                    description: "Formulaire de demande de pré-inscription en ligne. Contact : 766448541 pour paiement.",
+                    url: "#preinscription",
+                    category: "Admission"
+                },
+                {
+                    title: "Contact",
+                    description: "33 946 15 15 / 76 644 85 41 / 77 330 33 33 - isikaffrine@groupeisi.com",
+                    url: "#contact",
+                    category: "Coordonnées"
+                },
+                {
+                    title: "Actualités - Cours en ligne 2026",
+                    description: "Lancement officiel des cours en ligne le 15 février 2026. Masters : Finance, Génie Logiciel, Réseaux. Licences : Réseaux Informatiques, Finance Comptabilité. Brevet de Technicien.",
+                    url: "#actualites",
+                    category: "Actualités"
+                },
+                {
+                    title: "Actualités - Ouverture des inscriptions",
+                    description: "Les inscriptions pour l'année académique 2025-2026 sont ouvertes depuis octobre 2024.",
+                    url: "#actualites",
+                    category: "Actualités"
+                },
+                {
+                    title: "Actualités - Renouvellement AMEA",
+                    description: "Préparation du renouvellement de l'AMEA (Amical des Etudiants et Alumnis).",
+                    url: "#actualites",
+                    category: "Actualités"
+                },
+                {
+                    title: "E-learning",
+                    description: "Formations en ligne et plateformes d'enseignement à distance. Début des cours : 15 février 2026.",
+                    url: "pages/elearning.html",
+                    category: "Formation"
+                },
+                {
+                    title: "Vie Associative",
+                    description: "Découvrez toutes les activités et associations qui animent le campus : AMEA, Evènements culturels, Activités sportives, Administration, Campus et vie Etudiante, Etudiant et Alumnis, Autres moments.",
+                    url: "#vie-associative",
+                    category: "Vie étudiante"
+                },
+                {
+                    title: "Licences",
+                    description: "Programmes de licence dans tous les départements : Génie Informatique, Réseaux, IA, Gestion.",
+                    url: "#departements",
+                    category: "Formations"
+                },
+                {
+                    title: "Masters",
+                    description: "Programmes de master spécialisés : Génie Logiciel, Réseaux & Systèmes, Data Science, Finance.",
+                    url: "#departements",
+                    category: "Formations"
+                },
+                {
+                    title: "Stages en entreprise",
+                    description: "Partenariats avec des entreprises leaders pour les stages pratiques des étudiants.",
+                    url: "#methode",
+                    category: "Pédagogie"
+                },
+                {
+                    title: "Diplômes reconnus",
+                    description: "Certifications agréées par l'État du Sénégal, reconnaissance nationale.",
+                    url: "#methode",
+                    category: "Certifications"
+                }
+            ];
+            
+            searchButton.addEventListener('click', function() {
+                searchOverlay.classList.add('active');
+                searchInput.focus();
+                searchResults.classList.remove('active');
+                searchResults.innerHTML = '';
+            });
+            
+            searchClose.addEventListener('click', function() {
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
+                    searchOverlay.classList.remove('active');
+                    searchInput.value = '';
+                }
+            });
+            
+            function performSearch(query) {
+                query = query.toLowerCase().trim();
+                
+                if (query.length < 2) {
+                    searchResults.innerHTML = '<p class="no-results">Veuillez entrer au moins 2 caractères</p>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const results = searchData.filter(item => {
+                    return item.title.toLowerCase().includes(query) || 
+                           item.description.toLowerCase().includes(query) ||
+                           item.category.toLowerCase().includes(query);
+                });
+                
+                displayResults(results, query);
+            }
+            
+            function displayResults(results, query) {
+                searchResults.innerHTML = '';
+                
+                if (results.length === 0) {
+                    searchResults.innerHTML = `
+                        <div class="no-results">
+                            <p>Aucun résultat trouvé pour "<strong>${query}</strong>"</p>
+                            <p style="margin-top: 10px; font-size: 14px;">
+                                Suggestions : 
+                                <span style="color: #007bff; cursor: pointer;" onclick="document.getElementById('searchInput').value = 'informatique'">informatique</span>, 
+                                <span style="color: #007bff; cursor: pointer;" onclick="document.getElementById('searchInput').value = 'formation'">formation</span>, 
+                                <span style="color: #007bff; cursor: pointer;" onclick="document.getElementById('searchInput').value = 'inscription'">inscription</span>
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    searchResults.innerHTML = `<h3>${results.length} résultat(s) trouvé(s) :</h3>`;
+                    
+                    results.forEach(result => {
+                        const resultElement = document.createElement('div');
+                        resultElement.className = 'search-result-item';
+                        resultElement.innerHTML = `
+                            <a href="${result.url}" onclick="closeSearch()">
+                                <h4>${highlightText(result.title, query)}</h4>
+                                <p>${highlightText(result.description, query)}</p>
+                                <small style="color: #aaa;">${result.category}</small>
+                            </a>
+                        `;
+                        searchResults.appendChild(resultElement);
+                    });
+                }
+                
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!query) return text;
+                
+                const regex = new RegExp(`(${query})`, 'gi');
+                return text.replace(regex, '<span style="background-color: #007bff40; padding: 2px 4px; border-radius: 3px;">$1</span>');
+            }
+            
+            window.closeSearch = function() {
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+            };
+            
+            searchInput.addEventListener('input', function() {
+                performSearch(this.value);
+            });
+            
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                performSearch(searchInput.value);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch(this.value);
+                }
+            });
+            
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.main-nav') && !event.target.closest('.mobile-toggle')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || href.startsWith('#!')) return;
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        
+                        mainNav.classList.remove('active');
+                        
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.display = 'flex';
+                } else {
+                    scrollTopBtn.style.display = 'none';
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            const form = document.getElementById('preinscription-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Votre demande de pré-inscription a été envoyée avec succès !\n\nNuméro de paiement : 766448541\n\nNous vous contacterons bientôt.');
+                    form.reset();
+                });
+            }
+            
+            const yearSpan = document.querySelector('.footer-bottom p');
+            if (yearSpan) {
+                yearSpan.innerHTML = yearSpan.innerHTML.replace('2025', new Date().getFullYear());
+            }
+            
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            const lightboxContent = document.getElementById('lightboxContent');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxThumbnails = document.getElementById('lightboxThumbnails');
+
+            let currentIndex = 0;
+            let mediaItems = [];
+
+            function initLightbox() {
+                const images = Array.from(document.querySelectorAll('.lightbox-image'));
+                const videos = Array.from(document.querySelectorAll('.gallery-video'));
+                
+                mediaItems = [...images, ...videos].map((item, index) => ({
+                    element: item,
+                    src: item.tagName === 'IMG' ? item.src : item.querySelector('source')?.src || item.src,
+                    alt: item.alt || (item.tagName === 'VIDEO' ? 'Vidéo' : 'Image'),
+                    type: item.tagName === 'IMG' ? 'image' : 'video',
+                    caption: item.alt || (item.tagName === 'IMG' ? 'Image' : 'Vidéo')
+                }));
+
+                mediaItems.forEach((item, index) => {
+                    item.element.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentIndex = index;
+                        openLightbox();
+                    });
+                });
+            }
+
+            function openLightbox() {
+                updateLightboxContent();
+                updateThumbnails();
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightboxOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            function updateLightboxContent() {
+                const item = mediaItems[currentIndex];
+                
+                const existingMedia = lightboxContent.querySelector('.lightbox-media');
+                if (existingMedia) {
+                    existingMedia.remove();
+                }
+
+                let mediaElement;
+                if (item.type === 'image') {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = item.src;
+                    mediaElement.alt = item.alt;
+                } else {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = item.src;
+                    mediaElement.controls = true;
+                    mediaElement.autoplay = true;
+                }
+                
+                mediaElement.className = 'lightbox-media';
+                lightboxContent.insertBefore(mediaElement, lightboxThumbnails);
+
+                lightboxCounter.textContent = `${currentIndex + 1} / ${mediaItems.length}`;
+                lightboxCaption.textContent = item.caption;
+                
+                const thumbnails = document.querySelectorAll('.lightbox-thumbnail');
+                thumbnails.forEach((thumb, index) => {
+                    if (index === currentIndex) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+
+                if (mediaItems.length <= 1) {
+                    lightboxPrev.style.display = 'none';
+                    lightboxNext.style.display = 'none';
+                } else {
+                    lightboxPrev.style.display = 'flex';
+                    lightboxNext.style.display = 'flex';
+                }
+            }
+
+            function updateThumbnails() {
+                lightboxThumbnails.innerHTML = '';
+                
+                mediaItems.forEach((item, index) => {
+                    const thumbnail = document.createElement('img');
+                    if (item.type === 'image') {
+                        thumbnail.src = item.src;
+                    } else {
+                        thumbnail.src = 'https://via.placeholder.com/60x60/007bff/ffffff?text=VIDEO';
+                    }
+                    thumbnail.alt = item.alt;
+                    thumbnail.className = 'lightbox-thumbnail';
+                    if (index === currentIndex) {
+                        thumbnail.classList.add('active');
+                    }
+                    thumbnail.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateLightboxContent();
+                    });
+                    lightboxThumbnails.appendChild(thumbnail);
+                });
+            }
+
+            function prevMedia() {
+                if (mediaItems.length > 0) {
+                    currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+                    updateLightboxContent();
+                }
+            }
+
+            function nextMedia() {
+                if (mediaItems.length > 0) {
+                    currentIndex = (currentIndex + 1) % mediaItems.length;
+                    updateLightboxContent();
+                }
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', prevMedia);
+            lightboxNext.addEventListener('click', nextMedia);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+                    closeLightbox();
+                }
+                if (lightboxOverlay.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        prevMedia();
+                    }
+                    if (e.key === 'ArrowRight') {
+                        nextMedia();
+                    }
+                }
+            });
+
+            lightboxOverlay.addEventListener('click', (e) => {
+                if (e.target === lightboxOverlay) {
+                    closeLightbox();
+                }
+            });
+
+            initLightbox();
+            
+            const seeMoreBtn = document.getElementById('amea-see-more');
+            if (seeMoreBtn) {
+                seeMoreBtn.addEventListener('click', function() {
+                    alert('Plus d\'activités à venir ! Restez connectés pour découvrir tous les moments de la vie associative de l\'ISI.');
+                });
+            }
+        });
+        
+        function toggleContent(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('i');
+
+            const allContents = document.querySelectorAll('.association-content');
+            const allHeaders = document.querySelectorAll('.association-header');
+            
+            if (!content.classList.contains('show')) {
+                allContents.forEach(c => {
+                    c.classList.remove('show');
+                });
+                allHeaders.forEach(h => {
+                    h.classList.remove('active');
+                    h.querySelector('i').style.transform = 'rotate(0deg)';
+                });
+            }
+            
+            content.classList.toggle('show');
+            header.classList.toggle('active');
+            
+            if (content.classList.contains('show')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body>
+</html>
