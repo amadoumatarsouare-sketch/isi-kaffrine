@@ -3,66 +3,882 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ISI Kaffrine - Institut Supérieur d'Informatique - Actualités et événements">
-    <title>Actualités - ISI Kaffrine</title>
-
-    <!-- Fonts -->
+    <meta name="description" content="ISI Kaffrine - Institut Supérieur d'Informatique - Formations en Informatique, Réseaux, Gestion">
+    <title>ISI Kaffrine - Institut Supérieur d'Informatique</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/style_v2.css">
-    <!-- Lightbox CSS -->
+    
     <style>
-        .nav-logo {
-            height: 80px;
-            width: auto;
-            margin-right: 10px;
-            max-width: 200px;
-            object-fit: contain;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .lightbox {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(5px);
-            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        .lightbox img, .lightbox video {
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .bg-light {
+            background: #f8f9fa;
+        }
+        
+        .header-main {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo-image {
+            height: 60px;
+            width: auto;
+        }
+        
+        .main-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #007bff;
+        }
+        
+        .nav-link.active::after {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #007bff;
+        }
+        
+        .nav-item.has-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            display: none;
+            z-index: 100;
         }
-
-        .lightbox .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
+        
+        .nav-item.has-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .dropdown-menu li {
+            list-style: none;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
             transition: all 0.3s ease;
         }
-
-        .lightbox .close:hover {
-            transform: scale(1.2);
+        
+        .dropdown-menu a:hover {
+            background: #007bff;
+            color: white;
+        }
+        
+        .fas.fa-chevron-down {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn-search {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        .btn-search:hover {
             color: #007bff;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1100;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .search-overlay.active {
+            display: flex;
+        }
+        
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .search-close:hover {
+            color: #007bff;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .search-submit {
+            padding: 15px 30px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .search-submit:hover {
+            background: #0056b3;
+        }
+        
+        .search-results {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-results h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .search-result-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-result-item a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .search-result-item h4 {
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+        
+        .search-result-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        
+        .no-results {
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        marquee {
+            background: #007bff;
+            color: white;
+            padding: 10px 0;
+            font-weight: bold;
+            margin-top: 91px;
+        }
+        
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('etudiants.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .hero-content {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .title-highlight {
+            color: #007bff;
+            display: block;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #007bff;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-subtitle {
+            color: #007bff;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: #007bff;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            position: relative;
+        }
+        
+        .about-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+        
+        .about-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .about-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .about-features i {
+            color: #007bff;
+            margin-top: 3px;
+        }
+        
+        .methode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .methode-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .methode-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .methode-icon {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        
+        .methode-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .icon {
+            width: 70px;
+            height: 70px;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+        }
+        
+        .toggle {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle:hover {
+            background: #0056b3;
+        }
+        
+        .content {
+            display: none;
+            margin-top: 15px;
+            text-align: left;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .content p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .administration-section,
+        .motpdg-section {
+            padding: 60px 0;
+        }
+        
+        .administration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .admin-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .admin-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 3px solid #007bff;
+        }
+        
+        .motpdg-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .motpdg-content img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        textarea {
+            grid-column: 1 / -1;
+        }
+        
+        button[type="submit"] {
+            grid-column: 1 / -1;
+            padding: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background: #0056b3;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        article {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        article h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        
+        article img {
+            max-width: 400px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: #007bff;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #007bff;
+        }
+        
+        .footer-contact li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            border-radius: 25px 0 0 25px;
+            border-right: none;
+        }
+        
+        .newsletter-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-bottom-links a {
+            color: #ddd;
+            text-decoration: none;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #007bff;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 100;
+        }
+        
+        .department-description {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .debourses-section {
+            background: #e9f7fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .debourses-section h4 {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .debourses-section ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .debourses-section li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .debourses-section p {
+            font-size: 14px;
+            color: #666;
         }
 
         .actualite-banner {
@@ -118,30 +934,618 @@
             text-align: center;
             font-weight: 500;
         }
+
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .lightbox-media {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+            color: #007bff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            font-weight: 500;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            padding: 20px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #007bff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-nav.prev {
+            left: 30px;
+        }
+
+        .lightbox-nav.next {
+            right: 30px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: white;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .lightbox-thumbnails {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            max-width: 90%;
+            overflow-x: auto;
+        }
+
+        .lightbox-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-thumbnail:hover {
+            transform: scale(1.1);
+        }
+
+        .lightbox-thumbnail.active {
+            border: 2px solid #007bff;
+            transform: scale(1.1);
+        }
+
+        .lightbox-image, 
+        .lightbox-video {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-image:hover,
+        .lightbox-video:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,123,255,0.3);
+        }
+
+        .association-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .association-section .section-title {
+            color: white;
+        }
+
+        .association-section .section-subtitle {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .association-flex {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            margin-top: 40px;
+        }
+
+        .association-block {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .association-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .association-header {
+            background: linear-gradient(135deg, #007bff, #00d2ff);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .association-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .association-header i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .association-header.active i {
+            transform: rotate(180deg);
+        }
+
+        .association-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background: #f8f9fa;
+        }
+
+        .association-content.show {
+            max-height: 3000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .association-inner {
+            padding: 25px;
+        }
+
+        .association-inner h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .association-inner h4 {
+            color: #007bff;
+            margin: 20px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .association-inner p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .association-inner p::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .association-inner p::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .association-inner p::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 5px;
+        }
+
+        .association-inner ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .association-inner li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: #666;
+        }
+
+        .association-inner li:before {
+            content: "✓";
+            color: #007bff;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .association-inner .badge {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .association-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .association-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .association-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .association-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .association-meta i {
+            color: #007bff;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .gallery-item {
+            width: 220px;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .gallery-video {
+            width: 220px;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .motpdg-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .lightbox-nav {
+                font-size: 30px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .lightbox-close {
+                font-size: 40px;
+                top: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 91px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .main-nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                padding-left: 20px;
+                display: none;
+            }
+            
+            .nav-item.has-dropdown:hover .dropdown-menu {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-cta,
+            .hero-stats,
+            .cta-actions {
+                flex-direction: column;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            marquee {
+                margin-top: 91px;
+                font-size: 18px;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-submit {
+                width: 100%;
+            }
+            
+            .lightbox-content {
+                padding: 20px;
+            }
+            
+            .lightbox-nav {
+                display: none;
+            }
+            
+            .lightbox-thumbnails {
+                bottom: 50px;
+            }
+            
+            .gallery-container {
+                justify-content: center;
+            }
+            
+            .gallery-item {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .gallery-video {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .administration-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-container {
+                padding: 10px;
+            }
+            
+            .lightbox-close {
+                font-size: 35px;
+                top: 15px;
+                right: 15px;
+            }
+        }
     </style>
 </head>
 <body>
-    <marquee style="background-color: #007bff; color: white; font-size: 24px; font-weight: bold; padding: 10px 0;">INSTITUT SUPERIEUR D'INFORMATIQUE ISI_KAFFRINE</marquee>
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-header">
+                <h2 style="color: white; font-size: 24px;">Rechercher sur le site</h2>
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form class="search-form" id="searchForm">
+                <input type="text" class="search-input" id="searchInput" 
+                       placeholder="Rechercher des formations, actualités, informations..." 
+                       autocomplete="off">
+                <button type="submit" class="search-submit">
+                    <i class="fas fa-search"></i> Rechercher
+                </button>
+            </form>
+            
+            <div class="search-results" id="searchResults">
+            </div>
+        </div>
+    </div>
 
-    <!-- ========== HEADER MAIN ========== -->
-    <header class="header-main container" id="header">
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <div class="lightbox-content" id="lightboxContent">
+            <span class="lightbox-close" id="lightboxClose">&times;</span>
+            <span class="lightbox-nav prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+            <span class="lightbox-nav next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+            <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+        </div>
+    </div>
+
+    <marquee>INSTITUT SUPERIEUR D'INFORMATIQUE ISI_KAFFRINE</marquee>
+
+    <header class="header-main" id="header">
         <div class="container">
             <div class="header-content">
-                <!-- Logo -->
                 <div class="logo-wrapper">
-                    <div class="logo-text">
-                        <img src="../logos.jpeg" alt="ISI Kaffrine" class="logo-image">
-                    </div>
+                    <img src="../logos.jpeg" alt="ISI Kaffrine" class="logo-image">
                 </div>
 
-                <!-- Navigation Desktop -->
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
                 <nav class="main-nav" id="mainNav">
                     <ul class="nav-list">
-                        <li class="nav-item logo-nav-item">
-                            <img src="../logos.jpeg" alt="ISI Logo" class="nav-logo">
-                        </li>
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">Accueil</a>
+                            <a href="../index.html" class="nav-link active">Accueil</a>
                         </li>
                         <li class="nav-item has-dropdown">
                             <a href="#" class="nav-link">
@@ -149,8 +1553,8 @@
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="../index.html#administration">Administration</a></li>
-                                <li><a href="../index.html#motpdg">Mot du PDG</a></li>
+                                <li><a href="administration.html">Administration</a></li>
+                                <li><a href="motdupdg.html">Mot du PDG</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -163,49 +1567,22 @@
                             <a href="amea.html" class="nav-link">Vie Associative</a>
                         </li>
                         <li class="nav-item">
-                            <a href="actualite.html" class="nav-link active">Actualités</a>
+                            <a href="#" class="nav-link">Actualités</a>
                         </li>
                         <li class="nav-item">
                             <a href="contact.html" class="nav-link">Contact</a>
                         </li>
                     </ul>
                 </nav>
-             
 
-                <!-- Header Actions -->
                 <div class="header-actions">
-                    <button class="btn-search" id="searchBtn" aria-label="Rechercher">
+                    <button class="btn-search" id="searchButton">
                         <i class="fas fa-search"></i>
                     </button>
-                    <a href="../index.html#preinscription" class="btn-primary btn-header">
+                    <a href="preinscription.html" class="btn-primary btn-header">
                         <span>Pré-inscription</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Search Overlay -->
-        <div class="search-overlay" id="searchOverlay">
-            <div class="search-container">
-                <button class="search-close" id="searchClose">
-                    <i class="fas fa-times"></i>
-                </button>
-                <form class="search-form">
-                    <input type="search" placeholder="Rechercher une formation, un département..." class="search-input">
-                    <button type="submit" class="search-submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-                <div class="search-suggestions">
-                    <h4>Suggestions populaires</h4>
-                    <ul>
-                        <li><a href="departements.html">Réseaux Informatique</a></li>
-                        <li><a href="departements.html">Comptabilité Finance</a></li>
-                        <li><a href="departements.html">Infographie</a></li>
-                        <li><a href="../index.html#preinscription">Inscription en ligne</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -336,76 +1713,48 @@
     </section>
 
     <footer class="footer">
-        <div class="footer-main">
-            <div class="container">
-                <div class="footer-grid">
-                   
-                    <div class="footer-col">
-                        <div class="footer-logo">
-                            <img src="../logo.jpg" alt="ISI Kaffrine">
-                            <span>INSTITUT SUPERIEUR D'INFORMATIQUE</span>
-                        </div>
-                        <p class="footer-text">
-                            Institut Supérieur d'Informatique de Kaffrine - Formation de qualité depuis 2014
-                        </p>
-                        <div class="footer-social">
-                            <a href="https://www.facebook.com/isikaffrine" target="_blank">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="https://www.tiktok.com/@la.isienne" target="_blank">
-                                <i class="fab fa-tiktok"></i>
-                            </a>
-                            <a href="#" target="_blank">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../logo.jpg" alt="ISI Kaffrine" class="lightbox-image">
+                        <span>INSTITUT SUPERIEUR D'INFORMATIQUE</span>
                     </div>
-
-                    <div class="footer-col">
-                        <h4 class="footer-title">Liens rapides</h4>
-                        <ul class="footer-links">
-                            <li><a href="#Accueil">Accueil</a></li>
-                            <li><a href="departements.html">Formations</a></li>
-                            <li><a href="elearning.html">E-learning</a></li>
-                            <li><a href="actualite.html">Actualités</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4 class="footer-title">Contact</h4>
-                        <ul class="footer-contact">
-                            <li>
-                                <i class="fas fa-phone"></i>
-                                <span>33 946 15 15 / 76 644 85 41</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <span>isikaffrine@groupeisi.com</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Kaffrine, Sénégal</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-col">
-                        <h4 class="footer-title">Newsletter</h4>
-                        <p class="footer-text">Restez informé de nos actualités</p>
-                        <form class="newsletter-form">
-                            <input type="email" placeholder="Votre email" required>
-                            <button type="submit">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
+                    <p>Institut Supérieur d'Informatique de Kaffrine - Formation de qualité depuis 2014</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/isikaffrine" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@la.isienne" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">Liens rapides</h4>
+                    <ul class="footer-links">
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="administration.html">Administration</a></li>
+                        <li><a href="motpdg.html">Mot du PDG</a></li>
+                        <li><a href="departements.html">Formations</a></li>
+                        <li><a href="actualite.html">Actualites</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> <span>33 946 15 15 / 76 644 85 41</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>isikaffrine@groupeisi.com</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Kaffrine, Sénégal</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p>Restez informé de nos actualités</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
+            <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <p>&copy; 2025 ISI Kaffrine. Tous droits réservés.</p>
                     <div class="footer-bottom-links">
@@ -417,73 +1766,277 @@
         </div>
     </footer>
 
-    <button class="scroll-top" id="scrollTop" aria-label="Retour en haut">
+    <button class="scroll-top" id="scrollTop">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
-    <script src="../js/main_v2.js"></script>
-
-    <div id="lightbox" class="lightbox">
-        <span class="close">&times;</span>
-        <div id="lightbox-content"></div>
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-          
-            fetch('backend.php?action=log_visit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'page=' + encodeURIComponent(window.location.pathname)
-            }).catch(error => console.error('Erreur logging visite:', error));
 
-            const lightbox = document.getElementById('lightbox');
-            const lightboxContent = document.getElementById('lightbox-content');
-            const closeBtn = lightbox.querySelector('.close');
-
-            function openLightbox(element) {
-                const clone = element.cloneNode(true);
-                clone.style.maxWidth = '95%';
-                clone.style.maxHeight = '95%';
-                clone.style.objectFit = 'contain';
-                
-                if (clone.tagName === 'VIDEO') {
-                    clone.controls = true;
-                    clone.autoplay = true;
+            const searchButton = document.getElementById('searchButton');
+            const searchOverlay = document.getElementById('searchOverlay');
+            const searchClose = document.getElementById('searchClose');
+            const searchInput = document.getElementById('searchInput');
+            const searchForm = document.getElementById('searchForm');
+            const searchResults = document.getElementById('searchResults');
+            
+            const searchData = [
+                {
+                    title: "Accueil - ISI Kaffrine",
+                    description: "Décrochez votre diplôme en Informatique. Formation de qualité, campus moderne, insertion professionnelle garantie.",
+                    url: "#accueil",
+                    category: "Page principale"
+                },
+                {
+                    title: "Mot du PDG",
+                    description: "Message de M Abdou SAMBE, PDG du Groupe ISI : 'former et bien former'.",
+                    url: "#motpdg",
+                    category: "Direction"
+                },
+                {
+                    title: "À propos de nous",
+                    description: "Inauguré en 2014, l'Institut Supérieur d'Informatique est une référence dans la région en matière de formation professionnelle.",
+                    url: "#about",
+                    category: "À propos"
+                },
+                {
+                    title: "Génie Informatique",
+                    description: "Formations en Génie Logiciel, Infographie & Multimédia, Informatique de Gestion, Géomatique, Marketing Digital.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Réseaux & Systèmes",
+                    description: "Formations en Réseaux Informatiques, Télécoms, Cybersécurité, IoT & Systèmes Embarqués, Énergies Renouvelables.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Intelligence Artificielle",
+                    description: "Formations en Data Science & Big Data, MIAGE, Master Data Science & IA.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Gestion",
+                    description: "Formations en Finance & Comptabilité, Commerce International, Banque & Assurance.",
+                    url: "#departements",
+                    category: "Départements"
+                },
+                {
+                    title: "Méthode ISI",
+                    description: "Formation pratique, équipements modernes, stages en entreprise, diplômes reconnus par l'État.",
+                    url: "#methode",
+                    category: "Pédagogie"
+                },
+                {
+                    title: "Administration",
+                    description: "Mr Babacar NDIAYE (Responsable du campus) et Mme Djiké Waly DIOUF (Comptable du campus).",
+                    url: "#administration",
+                    category: "Équipe"
+                },
+                {
+                    title: "Pré-inscription",
+                    description: "Formulaire de demande de pré-inscription en ligne. Contact : 766448541 pour paiement.",
+                    url: "#preinscription",
+                    category: "Admission"
+                },
+                {
+                    title: "Contact",
+                    description: "33 946 15 15 / 76 644 85 41 / 77 330 33 33 - isikaffrine@groupeisi.com",
+                    url: "#contact",
+                    category: "Coordonnées"
+                },
+                {
+                    title: "Actualités - Cours en ligne 2026",
+                    description: "Lancement officiel des cours en ligne le 15 février 2026. Masters : Finance, Génie Logiciel, Réseaux. Licences : Réseaux Informatiques, Finance Comptabilité. Brevet de Technicien.",
+                    url: "#actualites",
+                    category: "Actualités"
+                },
+                {
+                    title: "Actualités - Ouverture des inscriptions",
+                    description: "Les inscriptions pour l'année académique 2025-2026 sont ouvertes depuis octobre 2024.",
+                    url: "#actualites",
+                    category: "Actualités"
+                },
+                {
+                    title: "Actualités - Renouvellement AMEA",
+                    description: "Préparation du renouvellement de l'AMEA (Amical des Etudiants et Alumnis).",
+                    url: "#actualites",
+                    category: "Actualités"
+                },
+                {
+                    title: "E-learning",
+                    description: "Formations en ligne et plateformes d'enseignement à distance. Début des cours : 15 février 2026.",
+                    url: "pages/elearning.html",
+                    category: "Formation"
+                },
+                {
+                    title: "Vie Associative",
+                    description: "Découvrez toutes les activités et associations qui animent le campus : AMEA, Evènements culturels, Activités sportives, Administration, Campus et vie Etudiante, Etudiant et Alumnis, Autres moments.",
+                    url: "#vie-associative",
+                    category: "Vie étudiante"
+                },
+                {
+                    title: "Licences",
+                    description: "Programmes de licence dans tous les départements : Génie Informatique, Réseaux, IA, Gestion.",
+                    url: "#departements",
+                    category: "Formations"
+                },
+                {
+                    title: "Masters",
+                    description: "Programmes de master spécialisés : Génie Logiciel, Réseaux & Systèmes, Data Science, Finance.",
+                    url: "#departements",
+                    category: "Formations"
+                },
+                {
+                    title: "Stages en entreprise",
+                    description: "Partenariats avec des entreprises leaders pour les stages pratiques des étudiants.",
+                    url: "#methode",
+                    category: "Pédagogie"
+                },
+                {
+                    title: "Diplômes reconnus",
+                    description: "Certifications agréées par l'État du Sénégal, reconnaissance nationale.",
+                    url: "#methode",
+                    category: "Certifications"
                 }
-                
-                lightboxContent.innerHTML = '';
-                lightboxContent.appendChild(clone);
-                lightbox.style.display = 'block';
-            }
-
-            function closeLightbox() {
-                lightbox.style.display = 'none';
-                lightboxContent.innerHTML = '';
-            }
-
-            closeBtn.addEventListener('click', closeLightbox);
-
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) {
-                    closeLightbox();
-                }
+            ];
+            
+            searchButton.addEventListener('click', function() {
+                searchOverlay.classList.add('active');
+                searchInput.focus();
+                searchResults.classList.remove('active');
+                searchResults.innerHTML = '';
             });
-
+            
+            searchClose.addEventListener('click', function() {
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+            });
+            
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && lightbox.style.display === 'block') {
-                    closeLightbox();
+                if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
+                    searchOverlay.classList.remove('active');
+                    searchInput.value = '';
                 }
             });
-
-            document.querySelectorAll('.lightbox-image, .lightbox-video').forEach(element => {
-                element.addEventListener('click', function() {
-                    openLightbox(this);
+            
+            function performSearch(query) {
+                query = query.toLowerCase().trim();
+                
+                if (query.length < 2) {
+                    searchResults.innerHTML = '<p class="no-results">Veuillez entrer au moins 2 caractères</p>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const results = searchData.filter(item => {
+                    return item.title.toLowerCase().includes(query) || 
+                           item.description.toLowerCase().includes(query) ||
+                           item.category.toLowerCase().includes(query);
+                });
+                
+                displayResults(results, query);
+            }
+            
+            function displayResults(results, query) {
+                searchResults.innerHTML = '';
+                
+                if (results.length === 0) {
+                    searchResults.innerHTML = `
+                        <div class="no-results">
+                            <p>Aucun résultat trouvé pour "<strong>${query}</strong>"</p>
+                            <p style="margin-top: 10px; font-size: 14px;">
+                                Suggestions : 
+                                <span style="color: #007bff; cursor: pointer;" onclick="document.getElementById('searchInput').value = 'informatique'">informatique</span>, 
+                                <span style="color: #007bff; cursor: pointer;" onclick="document.getElementById('searchInput').value = 'formation'">formation</span>, 
+                                <span style="color: #007bff; cursor: pointer;" onclick="document.getElementById('searchInput').value = 'inscription'">inscription</span>
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    searchResults.innerHTML = `<h3>${results.length} résultat(s) trouvé(s) :</h3>`;
+                    
+                    results.forEach(result => {
+                        const resultElement = document.createElement('div');
+                        resultElement.className = 'search-result-item';
+                        resultElement.innerHTML = `
+                            <a href="${result.url}" onclick="closeSearch()">
+                                <h4>${highlightText(result.title, query)}</h4>
+                                <p>${highlightText(result.description, query)}</p>
+                                <small style="color: #aaa;">${result.category}</small>
+                            </a>
+                        `;
+                        searchResults.appendChild(resultElement);
+                    });
+                }
+                
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!query) return text;
+                
+                const regex = new RegExp(`(${query})`, 'gi');
+                return text.replace(regex, '<span style="background-color: #007bff40; padding: 2px 4px; border-radius: 3px;">$1</span>');
+            }
+            
+            window.closeSearch = function() {
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+            };
+            
+            searchInput.addEventListener('input', function() {
+                performSearch(this.value);
+            });
+            
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                performSearch(searchInput.value);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch(this.value);
+                }
+            });
+            
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.main-nav') && !event.target.closest('.mobile-toggle')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || href.startsWith('#!')) return;
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        
+                        mainNav.classList.remove('active');
+                        
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
-
+            
             const scrollTopBtn = document.getElementById('scrollTop');
             
             window.addEventListener('scroll', function() {
@@ -500,17 +2053,207 @@
                     behavior: 'smooth'
                 });
             });
-
-            const currentPage = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.nav-link');
             
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-                    link.classList.add('active');
+            const form = document.getElementById('preinscription-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Votre demande de pré-inscription a été envoyée avec succès !\n\nNuméro de paiement : 766448541\n\nNous vous contacterons bientôt.');
+                    form.reset();
+                });
+            }
+            
+            const yearSpan = document.querySelector('.footer-bottom p');
+            if (yearSpan) {
+                yearSpan.innerHTML = yearSpan.innerHTML.replace('2025', new Date().getFullYear());
+            }
+            
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            const lightboxContent = document.getElementById('lightboxContent');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxThumbnails = document.getElementById('lightboxThumbnails');
+
+            let currentIndex = 0;
+            let mediaItems = [];
+
+            function initLightbox() {
+                const images = Array.from(document.querySelectorAll('.lightbox-image'));
+                const videos = Array.from(document.querySelectorAll('.gallery-video'));
+                
+                mediaItems = [...images, ...videos].map((item, index) => ({
+                    element: item,
+                    src: item.tagName === 'IMG' ? item.src : item.querySelector('source')?.src || item.src,
+                    alt: item.alt || (item.tagName === 'VIDEO' ? 'Vidéo' : 'Image'),
+                    type: item.tagName === 'IMG' ? 'image' : 'video',
+                    caption: item.alt || (item.tagName === 'IMG' ? 'Image' : 'Vidéo')
+                }));
+
+                mediaItems.forEach((item, index) => {
+                    item.element.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentIndex = index;
+                        openLightbox();
+                    });
+                });
+            }
+
+            function openLightbox() {
+                updateLightboxContent();
+                updateThumbnails();
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightboxOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            function updateLightboxContent() {
+                const item = mediaItems[currentIndex];
+                
+                const existingMedia = lightboxContent.querySelector('.lightbox-media');
+                if (existingMedia) {
+                    existingMedia.remove();
+                }
+
+                let mediaElement;
+                if (item.type === 'image') {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = item.src;
+                    mediaElement.alt = item.alt;
+                } else {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = item.src;
+                    mediaElement.controls = true;
+                    mediaElement.autoplay = true;
+                }
+                
+                mediaElement.className = 'lightbox-media';
+                lightboxContent.insertBefore(mediaElement, lightboxThumbnails);
+
+                lightboxCounter.textContent = `${currentIndex + 1} / ${mediaItems.length}`;
+                lightboxCaption.textContent = item.caption;
+                
+                const thumbnails = document.querySelectorAll('.lightbox-thumbnail');
+                thumbnails.forEach((thumb, index) => {
+                    if (index === currentIndex) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+
+                if (mediaItems.length <= 1) {
+                    lightboxPrev.style.display = 'none';
+                    lightboxNext.style.display = 'none';
+                } else {
+                    lightboxPrev.style.display = 'flex';
+                    lightboxNext.style.display = 'flex';
+                }
+            }
+
+            function updateThumbnails() {
+                lightboxThumbnails.innerHTML = '';
+                
+                mediaItems.forEach((item, index) => {
+                    const thumbnail = document.createElement('img');
+                    if (item.type === 'image') {
+                        thumbnail.src = item.src;
+                    } else {
+                        thumbnail.src = 'https://via.placeholder.com/60x60/007bff/ffffff?text=VIDEO';
+                    }
+                    thumbnail.alt = item.alt;
+                    thumbnail.className = 'lightbox-thumbnail';
+                    if (index === currentIndex) {
+                        thumbnail.classList.add('active');
+                    }
+                    thumbnail.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateLightboxContent();
+                    });
+                    lightboxThumbnails.appendChild(thumbnail);
+                });
+            }
+
+            function prevMedia() {
+                if (mediaItems.length > 0) {
+                    currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+                    updateLightboxContent();
+                }
+            }
+
+            function nextMedia() {
+                if (mediaItems.length > 0) {
+                    currentIndex = (currentIndex + 1) % mediaItems.length;
+                    updateLightboxContent();
+                }
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', prevMedia);
+            lightboxNext.addEventListener('click', nextMedia);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+                    closeLightbox();
+                }
+                if (lightboxOverlay.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        prevMedia();
+                    }
+                    if (e.key === 'ArrowRight') {
+                        nextMedia();
+                    }
                 }
             });
+
+            lightboxOverlay.addEventListener('click', (e) => {
+                if (e.target === lightboxOverlay) {
+                    closeLightbox();
+                }
+            });
+
+            initLightbox();
+            
+            const seeMoreBtn = document.getElementById('amea-see-more');
+            if (seeMoreBtn) {
+                seeMoreBtn.addEventListener('click', function() {
+                    alert('Plus d\'activités à venir ! Restez connectés pour découvrir tous les moments de la vie associative de l\'ISI.');
+                });
+            }
         });
+        
+        function toggleContent(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('i');
+
+            const allContents = document.querySelectorAll('.association-content');
+            const allHeaders = document.querySelectorAll('.association-header');
+            
+            if (!content.classList.contains('show')) {
+                allContents.forEach(c => {
+                    c.classList.remove('show');
+                });
+                allHeaders.forEach(h => {
+                    h.classList.remove('active');
+                    h.querySelector('i').style.transform = 'rotate(0deg)';
+                });
+            }
+            
+            content.classList.toggle('show');
+            header.classList.toggle('active');
+            
+            if (content.classList.contains('show')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
     </script>
 </body>
 </html>
