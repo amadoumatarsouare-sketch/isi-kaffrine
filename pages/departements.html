@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ISI Kaffrine - Institut Supérieur d'Informatique - Formations en Informatique, Réseaux, Gestion">
+    <meta name="description" content="ISI Kaffrine - Institut Supérieur d'Informatique - Formations en Informatique, Réseaux, Gestion - Formations courtes certifiantes">
     <title>ISI Kaffrine - Institut Supérieur d'Informatique</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* Styles existants inchangés */
         * {
             margin: 0;
             padding: 0;
@@ -937,6 +936,128 @@
             font-weight: 500;
         }
 
+        /* Styles pour les formations courtes */
+        .short-courses-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+        }
+        
+        .short-courses-section .section-subtitle,
+        .short-courses-section .section-title {
+            color: white;
+        }
+        
+        .short-courses-section .section-title .highlight {
+            color: #ffd700;
+        }
+        
+        .short-courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .course-header {
+            background: linear-gradient(135deg, #007bff, #00d2ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .course-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .course-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .course-body {
+            padding: 20px;
+        }
+        
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #007bff;
+            font-weight: 500;
+        }
+        
+        .course-duration i {
+            font-size: 18px;
+        }
+        
+        .course-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .course-certification {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .course-certification i {
+            color: #4caf50;
+            margin-right: 8px;
+        }
+        
+        .course-certification span {
+            color: #2e7d32;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        
+        .course-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .btn-course {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-course:hover {
+            background: #0056b3;
+        }
+
         /* Lightbox Styles */
         .lightbox-overlay {
             position: fixed;
@@ -1370,6 +1491,7 @@
             </div>
         </div>
     </header>
+
     <section class="departements-section section-padding bg-light" id="departements">
         <div class="container">
             <div class="section-header">
@@ -1427,6 +1549,211 @@
             </div>
         </div>
     </section>
+
+    <!-- SECTION FORMATIONS COURTES DURÉE -->
+    <section class="short-courses-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Formations professionnelles</span>
+                <h2 class="section-title">Formations <span class="highlight">courtes durée</span></h2>
+                <p style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">De 3 à 6 mois • Certifications reconnues • Insertion rapide</p>
+            </div>
+            <div class="short-courses-grid">
+                <!-- Administration Réseau -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-network-wired"></i> Administration Réseau</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation complète pour maîtriser l'administration des réseaux d'entreprise : configuration des routeurs et commutateurs, gestion des serveurs, sécurité réseau et dépannage.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Réseau Câblage -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-plug"></i> Réseau Câblage</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation pratique aux techniques de câblage structuré : installation de prises RJ45, brassage, test de câbles, normes de sécurité et standards internationaux.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Développement Web & Mobile -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-code"></i> Développement Web & Mobile</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation complète au développement web et mobile : HTML5, CSS3, JavaScript, PHP/MySQL, création d'applications Android et iOS, interfaces utilisateur et publication sur les stores.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Marketing Digital -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-chart-line"></i> Marketing Digital</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation complète au marketing digital : SEO/SEA, réseaux sociaux, email marketing, content marketing, analytics, publicité en ligne et stratégie digitale.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Infographie -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-paint-brush"></i> Infographie</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation aux logiciels de création graphique : Photoshop, Illustrator, InDesign. Création de logos, affiches, supports de communication et maquettes.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Gestion de Caisse -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-cash-register"></i> Gestion de Caisse</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation pratique à la gestion de caisse : encaissement, gestion des fonds, clôture de caisse, logiciels de caisse, relation client et gestion des stocks.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Maintenance Informatique -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-tools"></i> Maintenance Informatique</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation aux techniques de maintenance : diagnostic de pannes, réparation d'ordinateurs, installation de logiciels, sauvegarde et restauration des données.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Secrétariat Bureautique -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3><i class="fas fa-file-alt"></i> Secrétariat Bureautique</h3>
+                        <div class="course-badge">Certification professionnelle</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>Durée : 3 à 6 mois</span>
+                        </div>
+                        <div class="course-description">
+                            Formation complète aux outils bureautiques : Word (mise en page, publipostage), Excel (tableaux, formules, graphiques), PowerPoint, Outlook et techniques de secrétariat.
+                        </div>
+                        <div class="course-certification">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certification délivrée en fin de formation</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        <a href="#preinscription" class="btn-course">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1614,6 +1941,30 @@
                     description: "Certifications agréées par l'État du Sénégal, reconnaissance nationale.",
                     url: "#methode",
                     category: "Certifications"
+                },
+                {
+                    title: "Administration Réseau",
+                    description: "Formation courte de 3 à 6 mois avec certification. Apprenez à administrer les réseaux d'entreprise.",
+                    url: "#formations-courtes",
+                    category: "Formations courtes"
+                },
+                {
+                    title: "Développement Web & Mobile",
+                    description: "Formation de 3 à 6 mois avec certification. Maîtrisez le développement web et mobile.",
+                    url: "#formations-courtes",
+                    category: "Formations courtes"
+                },
+                {
+                    title: "Marketing Digital",
+                    description: "Formation de 3 à 6 mois avec certification. Maîtrisez le marketing digital et les stratégies en ligne.",
+                    url: "#formations-courtes",
+                    category: "Formations courtes"
+                },
+                {
+                    title: "Maintenance Informatique",
+                    description: "Formation de 3 à 6 mois avec certification. Diagnostic, réparation et installation.",
+                    url: "#formations-courtes",
+                    category: "Formations courtes"
                 }
             ];
             
